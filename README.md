@@ -16,6 +16,9 @@ To launch the lf-pico shell environment, run the following in the root of the lf
 nix develop
 ```
 
+### Support for RP2350-based boards
+This template can also support RP2350-based boards, such as the Pico 2 and Pico 2 W. Prior to running `nix develop`, ensure that the environment variables are set correctly. For example, to accomodate the Pico 2 W, you may edit `shell.nix` to add the following line above `shellHook`: `PICO_BOARD = "pico2_w";`. You may also optionally specify `PICO_PLATFORM = "";`, where the blank value means the board header will automatically set it.
+
 ## Building
 Lingua Franca applications are code generated into the target language. To both code generate and build application binaries one can either use lfc or lingo. Lingo ultimately uses lfc as a backend but provides an additional experimental interface for managing multiple application binaries builds.
 
