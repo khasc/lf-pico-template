@@ -32,6 +32,7 @@ pkgs.mkShell {
     echo "[shell] setup pico-sdk"
     git submodule update --init
     cd pico-sdk/
+    # git switch master -f  # needed for newer Pico 2 boards
     git submodule update --init
     export PICO_SDK_PATH="$PWD"
     echo "[shell] PICO_SDK_PATH: $PICO_SDK_PATH" | lolcat
