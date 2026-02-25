@@ -1,7 +1,7 @@
 target C {
   platform: "Rp2040",
   single-threaded: true,
-  timeout: 5 sec
+  timeout: 10 s
 }
 
 preamble {=
@@ -9,7 +9,7 @@ preamble {=
 =}
 
 main reactor {
-  timer t1(0, 1 sec)
+  timer t1(0, 1 s)
 
   reaction(t1) {=
     printf("Hello World!\n");
