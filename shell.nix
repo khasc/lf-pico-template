@@ -22,8 +22,8 @@ pkgs.mkShell {
   ];
 
   # set environment variables
-  #PICO_BOARD = "pico";
-  #PICO_PLATFORM = "rp2040";
+  # per "Raspberry Pi Pico-series C/C++ SDK", 7.2 Platform and Board Configuration: "PICO_BOARD=my_board_name in your environment will cause the header my_board_name.h to be included by all other SDK headers in order to provide #defines particular to the board you are using...If PICO_BOARD is specified but not PICO_PLATFORM, PICO_PLATFORM will be set if a value for it is specified in the board header."
+  #PICO_BOARD = "pico2_w";  # specify if your board is not plain pico, for example: pico_w, pico2, pico2_w, etc
 
   # TODO: integrate dependencies into nix
   shellHook = ''
