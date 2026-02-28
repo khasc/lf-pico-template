@@ -1,6 +1,5 @@
 # Template for the Lingua Franca RP2040 target platform
-This repo is a template for [Lingua Franca](https://www.lf-lang.org/) projects using the bare metal RP2040 target platform such as found on the Raspberry Pi Pico board and the [Pololu 3pi+ 2040 robot](https://www.pololu.com/docs/0J86). Currently the repo supports MacOS, Linux, and Windows through [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
-To support RP2040-based boards, the repo uses the [Pico SDK](https://github.com/raspberrypi/pico-sdk/tree/master/src) as a dependency which includes a light set of headers, libraries and a build system.
+This repo is a template for [Lingua Franca](https://www.lf-lang.org/) projects using the bare metal RP2040 target platform such as found on the Raspberry Pi Pico 1 board and the [Pololu 3pi+ 2040 robot](https://www.pololu.com/docs/0J86). Currently the repo supports MacOS, Linux, and Windows through [WSL](https://learn.microsoft.com/en-us/windows/wsl/install). To support RP2040-based boards, the repo uses the [Pico SDK](https://github.com/raspberrypi/pico-sdk/tree/master/src) as a dependency which includes a light set of headers, libraries and a build system. This template can also be used with RP2350-based boards, such as the Pico 2 and Pico 2 W.
 
 ## Setup
 This template uses nix to manage toolchains and other applications. Install [nix](https://nixos.org/download.html) first for your preferred platform. Make note of the installation type since a **multi-user** install will require sudo permissions and will interact with a system-wide `/nix/store`. After installation, run the following in the shell to enable the experimental nix flakes feature.
@@ -10,14 +9,13 @@ mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 ```
 
+The board is specified via the `PICO_BOARD` CMake variable, which may be specified on the CMake command line or in the environment. One way to set environment variables for your build is in the file `shell.nix`, right above `shellHook`. Insert `PICO_BOARD = "my_board_name"`, where `my_board_name.h` is the board header file found in `pico-sdk/src/boards/include/boards/`. For example, to accomodate the Pico 2 W, insert `PICO_BOARD = "pico2_w"`. We can also insert `PICO_PLATFORM = "";`, where the empty value means the board header will automatically set it via `pico_board_cmake_set`.
+
 To launch the lf-pico shell environment, run the following in the root of the lf-pico repository. The launched shell will include the various required toolchains and applications needed for development.
 
 ```bash
 nix develop
 ```
-
-### Support for RP2350-based boards
-This template can also support RP2350-based boards, such as the Pico 2 and Pico 2 W. Prior to running `nix develop`, ensure that the environment variables are set correctly. For example, to accomodate the Pico 2 W, you may edit `shell.nix` to add the following line above `shellHook`: `PICO_BOARD = "pico2_w";`. You may also optionally specify `PICO_PLATFORM = "";`, where the blank value means the board header will automatically set it.
 
 ## Building
 Lingua Franca applications are code generated into the target language. To both code generate and build application binaries one can either use lfc or lingo. Lingo ultimately uses lfc as a backend but provides an additional experimental interface for managing multiple application binaries builds.
