@@ -19,6 +19,8 @@ pkgs.mkShell {
     # lf
     # lingo
   ];
+  
+  PICO_BOARD_HEADER_DIRS = "";  # path to search for your own board configuration, if desired
 
   # TODO: integrate dependencies into nix
   shellHook = ''
@@ -29,8 +31,6 @@ pkgs.mkShell {
     git submodule update --init
     export PICO_SDK_PATH="$PWD"
     cd ../
-    echo "[shell] copy robot header"
-    cp pololu_3pi_2040_robot.h pico-sdk/src/boards/include/boards/
     echo "[shell] setup testbed"
     cd test/
     npm install
