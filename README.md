@@ -9,7 +9,7 @@ mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 ```
 
-The board is specified via the `PICO_BOARD` CMake variable, which may be specified on the CMake command line or in the environment. One way to set environment variables for your build is in the file `shell.nix`, right above `shellHook`. Insert `PICO_BOARD = "my_board_name"`, where `my_board_name.h` is the board header file found in `pico-sdk/src/boards/include/boards/`. For example, to accomodate the Pico 2 W, insert `PICO_BOARD = "pico2_w"`. We can also insert `PICO_PLATFORM = "";`, where the empty value means the board header will automatically set it via `pico_board_cmake_set`.
+The board is specified via the `PICO_BOARD` CMake variable, which may be specified on the CMake command line or in the environment. One way to set environment variables for your build is in the file `shell.nix`, in the block above `shellHook`. Set `PICO_BOARD = "my_board_name"`, where `my_board_name.h` is the board header file found in `pico-sdk/src/boards/include/boards/`. For example, to build for Pico 2 W: `PICO_BOARD = "pico2_w"`. We also set `PICO_PLATFORM = "";`, where the empty value means the board header will automatically set it via `pico_board_cmake_set`.
 
 To launch the lf-pico shell environment, run the following in the root of the lf-pico repository. The launched shell will include the various required toolchains and applications needed for development.
 
