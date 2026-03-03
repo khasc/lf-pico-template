@@ -8,8 +8,8 @@ This template uses nix to manage toolchains and other applications. Install [nix
 mkdir -p ~/.config/nix
 echo "experimental-features = nix-command flakes" >> ~/.config/nix/nix.conf
 ```
-
-The board is specified via the `PICO_BOARD` CMake variable, which may be specified on the CMake command line or in the environment. One way to set environment variables for your build is in the file `shell.nix`, in the block above `shellHook`. Set `PICO_BOARD = "my_board_name"`, where `my_board_name.h` is the board header file found in `pico-sdk/src/boards/include/boards/`. For example, to build for Pico 2 W: `PICO_BOARD = "pico2_w"`. We also set `PICO_PLATFORM = "";`, where the empty value means the board header will automatically set it via `pico_board_cmake_set`.
+> [!NOTE]
+> This template is applicable to both RP2040 and RP2350 based boards. In many cases, you can rely on the board configuration to automatically set the platform. For example, `export PICO_BOARD=pico2` will lead to `PICO_PLATFORM=rp2350`. This can be done in the file `shell.nix`, in the block above `shellHook`. We also set `PICO_PLATFORM = "";` to ensure the board header automatically sets it. For more information, see the "Platform and Board Configuration" chapter of the [Raspberry Pi Pico-series C/C++ SDK](https://rptl.io/pico-c-sdk) book.
 
 To launch the lf-pico shell environment, run the following in the root of the lf-pico repository. The launched shell will include the various required toolchains and applications needed for development.
 
